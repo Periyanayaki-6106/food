@@ -11,7 +11,7 @@ public class Signup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
-    private String email;
+    private String Contactemail;
     private String password;
     private String firstName;
 
@@ -48,11 +48,11 @@ public class Signup {
     }
 
     public String getEmail() {
-        return email;
+        return Contactemail;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.Contactemail = email;
     }
 
     public String getPassword() {
