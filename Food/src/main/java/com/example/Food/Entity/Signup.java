@@ -13,10 +13,19 @@ public class Signup {
     private String username;
     private String email;
     private String password;
+    private String firstName;
 
     // Constructors
 
-    public Signup() {
+    public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public Signup() {
         // Default constructor
     }
 
