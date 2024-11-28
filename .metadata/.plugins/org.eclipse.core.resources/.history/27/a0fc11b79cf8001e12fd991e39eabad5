@@ -1,0 +1,20 @@
+package com.example.BalancerGateway.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+@RestController
+public class LoadBalancerController {
+	
+	 @Autowired
+	    private RestTemplate restTemplate;
+
+	    @GetMapping("/route")
+	    public String route() {
+	        // Use the RestTemplate to make a request to another service
+	        return restTemplate.getForObject("http://my-service/endpoint", String.class);
+	    }
+
+}

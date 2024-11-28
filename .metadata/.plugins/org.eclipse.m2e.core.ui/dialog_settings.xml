@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="C:\Users\2000107055\Desktop\online-library-management"/>
+			<item value="C:\Users\2000107055\Downloads\online-library-management"/>
+			<item value="C:\Users\2000107055\Documents\online-library-management"/>
+			<item value="C:\Users\2000107055\Downloads\api-gateway (2) 1\api-gateway"/>
+			<item value="C:\Users\2000107055\Downloads\flightCopy\flight"/>
+			<item value="C:\Users\2000107055\Downloads\book"/>
+			<item value="C:\Users\2000107055\Downloads\benif-serviceback"/>
+			<item value="C:\Users\2000107055\Downloads\benif-serviceback\benif-service"/>
+			<item value="C:\Users\2000107055\Downloads\BalancerGateway"/>
+			<item value="C:\Users\2000107055\Downloads\EurekaGateway"/>
+			<item value="C:\Users\2000107055\Downloads\passportRegister\studentManage\studentManage"/>
+			<item value="C:\Users\2000107055\Downloads\Employee"/>
+			<item value="C:\Users\2000107055\Documents\second backend\hotelmanagement"/>
+			<item value="C:\Users\2000107055\Downloads\manualpassportverify"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+</section>

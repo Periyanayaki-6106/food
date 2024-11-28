@@ -1,0 +1,163 @@
+package com.example.hotelmanagement.service;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.example.hotelmanagement.model.Admin;
+import com.example.hotelmanagement.model.Login;
+import com.example.hotelmanagement.model.Signup;
+import com.example.hotelmanagement.repository.AdminRepository;
+import com.example.hotelmanagement.repository.UserRepository;
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
+
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+
+import org.junit.jupiter.api.Test;
+
+class ServiceTest {
+	
+	private UserRepository userRepository;
+    private BCryptPasswordEncoder passwordEncoder;
+    private EmailService emailService;
+    private Cache<String, String> otpCache;
+    private UserImpl userService;
+    
+    
+    @Mock
+    private JavaMailSender javaMailSender;
+    private AdminRepository adminRepository;
+    private AdminImpl adminService;
+
+    
+
+    @BeforeEach
+    public void setUp() {
+        userRepository = mock(UserRepository.class);
+        passwordEncoder = mock(BCryptPasswordEncoder.class);
+        emailService = mock(EmailService.class);
+        otpCache = Caffeine.newBuilder()
+                .expireAfterWrite(5, TimeUnit.MINUTES)
+                .build();
+        userService = new UserImpl();
+        
+        MockitoAnnotations.initMocks(this);
+    }
+
+    @Test
+    public void testSaveOtp() {
+        // Given
+        UserImpl userService = new UserImpl();
+        String email = "test@example.com";
+        String otp = "123456";
+
+        // When
+        userService.saveOtp(email, otp);
+
+        // Then
+        String retrievedOtp = userService.getOtp(email);
+        assertEquals(otp, retrievedOtp);
+    }
+    
+    @Test
+    public void testSendRegistrationEmail() {
+        String toGmail = "recipient@example.com";
+        String userName = "John Doe";
+        String expectedMessage = "Expected registration email message..."; // Define your expected message here
+
+        // Create an instance of EmailImpl
+        EmailImpl emailService = new EmailImpl();
+
+        // Call the method to be tested
+        emailService.sendRegistrationEmail(toGmail, userName);
+
+        // In this example, you would need to capture the actual message sent
+        // and then compare it with the expected message.
+        // Since the actual implementation of sendRegistrationEmail is not provided, 
+        // I am just asserting the method call without checking the content of the email.
+        // You will need to modify this according to your actual implementation.
+        
+        // For example:
+        // assertEquals(expectedMessage, actualMessageSent);
+        
+        // If the sendRegistrationEmail method doesn't return anything,
+        // you might need to use other means (e.g., using a mock to verify the email sending).
+    }
+//    @Test
+//    public void testSendOtpEmail() throws MessagingException {
+//        String to = "recipient@example.com";
+//        String subject = "Password Reset OTP";
+//        String otp = "123456";
+//
+//        // Call the method to be tested
+//        emailService.sendOtpEmail(to, subject, otp);
+//
+//        // Verify that JavaMailSender's send method was called once with any MimeMessage
+//        verify(javaMailSender, times(1)).send(any(MimeMessage.class));
+//    }
+    
+    @Test
+    void testRegister_NewUser_Success() {
+        // Prepare test data
+        Signup user = new Signup();
+        user.setEmail("test@example.com");
+        user.setPassword("password");
+
+        // Mock behavior
+        when(userRepository.findByEmail("test@example.com")).thenReturn(Optional.empty());
+        when(passwordEncoder.encode("password")).thenReturn("encryptedPassword");
+
+        // Execute the method under test
+        boolean result = userService.Register(user);
+
+        // Verify the result
+        assertTrue(result);
+        verify(userRepository, times(1)).save(user);
+        verify(emailService, times(1)).sendRegistrationEmail("test@example.com", null);
+    }
+
+    @Test
+    void testRegister_ExistingUser_Failure() {
+        // Prepare test data
+        Signup user = new Signup();
+        user.setEmail("test@example.com");
+        user.setPassword("password");
+
+        // Mock behavior
+        when(userRepository.findByEmail("test@example.com")).thenReturn(Optional.of(user));
+
+        // Execute the method under test
+        boolean result = userService.Register(user);
+
+        // Verify the result
+        assertFalse(result);
+        verify(userRepository, never()).save(user);
+        verify(emailService, never()).sendRegistrationEmail(anyString(), anyString());
+    }
+  
+     
+    
+    
+    
+    
+ }
+    
+    
+    
+    
+    
+	
+

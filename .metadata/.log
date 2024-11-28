@@ -1,0 +1,101 @@
+!SESSION 2024-11-28 11:56:27.447 -----------------------------------------------
+eclipse.buildId=4.20.0.202309081654
+java.version=17.0.8.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4 -product org.springframework.boot.ide.branding.sts4
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springframework.boot.ide.branding.sts4 -data file:/C:/Users/2000107055/Documents/workspace-spring-tool-suite-4-4.20.0.RELEASE/ -product org.springframework.boot.ide.branding.sts4
+
+This is a continuation of log file C:\Users\2000107055\Documents\workspace-spring-tool-suite-4-4.20.0.RELEASE\.metadata\.bak_0.log
+Created Time: 2024-11-28 11:56:36.051
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:36.053
+!MESSAGE DelegatingStreamConnectionProvider - Starting Boot LS
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-11-28 11:56:36.084
+!MESSAGE Started org.springframework.tooling.boot.ls LS process 5872
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-11-28 11:56:37.395
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\2000107055'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.516
+!MESSAGE Boot project ADDED: BalancerGateway
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.519
+!MESSAGE Starting Boot LS...
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.523
+!MESSAGE Started Boot LS process
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.533
+!MESSAGE Boot project ADDED: Employeemgt
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.542
+!MESSAGE Boot project ADDED: EurekaGateway
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.549
+!MESSAGE Boot project ADDED: Food
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.559
+!MESSAGE Boot project ADDED: HomeApplication
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.566
+!MESSAGE Boot project ADDED: KeycloakDemo
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.573
+!MESSAGE Boot project ADDED: ProductsApplication
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.581
+!MESSAGE Boot project ADDED: Student
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.593
+!MESSAGE Boot project ADDED: StudentService
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.595
+!MESSAGE Boot project ADDED: VehicleService
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.597
+!MESSAGE Boot project ADDED: api-gateway
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.599
+!MESSAGE Boot project ADDED: book
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.610
+!MESSAGE Boot project ADDED: flight
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.619
+!MESSAGE Boot project ADDED: flightservice
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.627
+!MESSAGE Boot project ADDED: hotelmanagement
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.634
+!MESSAGE Boot project ADDED: online-library-application
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-11-28 11:56:37.643
+!MESSAGE Boot project ADDED: passportverification
+
+!ENTRY org.eclipse.jface 2 0 2024-11-28 12:08:31.906
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-28 12:08:31.906
+!MESSAGE A conflict occurred for CTRL+SHIFT+C:
+Binding(CTRL+SHIFT+C,
+	ParameterizedCommand(Command(org.eclipse.tm4e.languageconfiguration.toggleLineCommentCommand,Toggle Line Comment,
+		,
+		Category(org.eclipse.tm4e.languageconfiguration.category,TM4E Language Configuration,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.tm4e.languageconfiguration.toggleLineCommentCommand"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(CTRL+SHIFT+C,
+	ParameterizedCommand(Command(org.springframework.tooling.boot.ls.ToggleComment,Toggle Comment,
+		,
+		Category(org.springframework.ide.eclipse.commands,Spring Generic Text Editor,Spring Language Server Commands,true),
+		WorkbenchHandlerServiceHandler("org.springframework.tooling.boot.ls.ToggleComment"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)

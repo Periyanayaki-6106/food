@@ -1,0 +1,17 @@
+1728368276831	Rename package 'com.example.Vehicle'
+1728368293046	Rename package 'com.example.Vehicle.Controller'
+1728368319348	Rename package 'com.example.Vehicle.Entity'
+1728368330751	Rename package 'com.example.LibraryEntity'
+1728368365380	Delete element
+1728368376528	Delete element
+1728368385110	Delete element
+1728368391906	Delete element
+1728368399084	Delete element
+1728368416170	Rename package 'com.example.Vehicle.Service'
+1728368457044	Rename package 'com.example.Vehicle.Repository'
+1728368478444	Rename type 'VehicleImpl'
+1728368495768	Rename type 'VehicleService'
+1728368511610	Rename type 'Vehicle'
+1728368525217	Rename type 'VehicleController'
+1728368547476	Rename type 'VehicleServiceApplication'
+1728368580047	Rename type 'VehicleRepo'

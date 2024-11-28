@@ -1,0 +1,17 @@
+1707717301076	Delete element
+1707717632890	Rename package 'com.example.hotelmanagement.repo'
+1707717831999	Delete element
+1707721136567	Rename type 'LoginService'
+1707721177614	Rename type 'UserService'
+1707721223512	Rename type 'User_service'
+1707721254741	Rename type 'LoginRepository'
+1707721363856	Rename type 'UserService'
+1707721470136	Rename type 'UserRepository'
+1707721492375	Rename type 'LoginController'
+1707722164158	Delete element
+1707722318416	Rename compilation unit 'User_Impl.java'
+1707733479935	Delete element
+1707891377573	Rename type 'itemAction'
+1707891444147	Rename type 'ItemSummery'
+1707893174459	Rename package 'com.example.hotelmanagement.controller.admin'
+1707893251989	Rename package 'com.example.hotelmanagement.model.admin'

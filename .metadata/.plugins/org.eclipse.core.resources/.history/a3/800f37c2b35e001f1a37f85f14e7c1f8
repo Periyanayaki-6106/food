@@ -1,0 +1,5 @@
+package com.example.addressService.response;
+
+public class AddressResponse {
+
+}

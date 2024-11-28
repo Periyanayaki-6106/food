@@ -1,0 +1,5 @@
+spring.application.name=address-service
+spring.datasource.url=jdbc:mysql://localhost:3306/address
+spring.datasource.username=root
+spring.datasource.password=Peri@123
+server.port=8082

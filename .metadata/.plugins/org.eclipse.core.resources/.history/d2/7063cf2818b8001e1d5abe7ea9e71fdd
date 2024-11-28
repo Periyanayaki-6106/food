@@ -1,0 +1,330 @@
+package com.example.manualpassportverify.controller;
+
+import com.example.manualpassportverify.dto.PassportDTO;
+import com.example.manualpassportverify.model.Passport;
+import com.example.manualpassportverify.repository.PassportRepository;
+import net.sourceforge.tess4j.ITesseract;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
+
+import javax.imageio.ImageIO;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+@ActiveProfiles("test")
+@ExtendWith(MockitoExtension.class)
+class PassportControllerTest {
+
+    @MockBean
+    private PassportRepository passportRepository;
+
+    @MockBean
+    private ITesseract tesseract;
+
+    @MockBean
+    private ImageIO image;
+    
+    @InjectMocks
+    private PassportController passportController;
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Test
+     void testPassportVerificationEndpoint() throws Exception {
+        // Create a MockMvc instance
+//        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(passportController).build();
+
+        // Create a MockMultipartFile with your dummy JPEG content
+        byte[] fileContent = createDummyJpegContent();
+        MockMultipartFile multipartFile = new MockMultipartFile(
+                "passportDocumentFile",
+                "dummy.jpg",
+                MediaType.IMAGE_JPEG_VALUE,
+                fileContent
+        );
+
+        // Perform the request
+        mockMvc.perform(multipart("/api/verify")
+                .file(multipartFile)
+                .param("firstName", "John")
+                .param("lastName", "Doe")
+                .param("age", "25")
+                .param("line1", "Address Line 1")
+                .param("line2", "Address Line 2")
+                .param("state", "Some State")
+                .param("city", "Some City")
+                .param("pincode", "12345")
+                .param("phoneNumber", "1234567890")
+                .param("passportNumber", "AB123456")
+                .param("email", "john.doe@example.com")
+                .contentType(MediaType.MULTIPART_FORM_DATA))
+                .andExpect(status().isBadRequest());
+    }
+    
+    @Test
+     void testPassportVerificationEndpoint1() throws Exception {
+        // Specify the path to the real JPEG file
+        String filePath = "C:\\Users\\2000107055\\Downloads\\ayswarya.jpg";
+        Path path = Paths.get(filePath);
+
+        // Read the file content
+        byte[] fileContent = Files.readAllBytes(path);
+
+        // Create a MockMultipartFile with the real JPEG content
+        MockMultipartFile multipartFile = new MockMultipartFile(
+                "passportDocumentFile",
+                "ayswarya.jpg",
+                MediaType.IMAGE_JPEG_VALUE,
+                fileContent
+        );
+        when(tesseract.doOCR(any(BufferedImage.class))).thenReturn("John Doe");
+
+
+        // Perform the request
+        mockMvc.perform(multipart("/api/verify")
+                .file(multipartFile)
+                .param("firstName", "John")
+                .param("lastName", "Doe")
+                .param("age", "25")
+                .param("line1", "Address Line 1")
+                .param("line2", "Address Line 2")
+                .param("state", "Some State")
+                .param("city", "Some City")
+                .param("pincode", "12345")
+                .param("phoneNumber", "1234567890")
+                .param("passportNumber", "AB123456")
+                .param("email", "john.doe@example.com")
+                .contentType(MediaType.MULTIPART_FORM_DATA))
+                .andExpect(status().isOk());
+    }
+    @Test
+     void testPassportVerificationEndpoint2() throws Exception {
+        // Specify the path to the real JPEG file
+        String filePath = "C:\\Users\\2000107055\\Downloads\\ayswarya.jpg";
+        Path path = Paths.get(filePath);
+        Passport mockPassport = new Passport();
+        mockPassport.setId(1L);
+        // Read the file content
+        byte[] fileContent = Files.readAllBytes(path);
+        when(passportRepository.findByPassportNumber("AB123456")).thenReturn(mockPassport);
+
+        // Create a MockMultipartFile with the real JPEG content
+        MockMultipartFile multipartFile = new MockMultipartFile(
+                "passportDocumentFile",
+                "ayswarya.jpg",
+                MediaType.IMAGE_JPEG_VALUE,
+                fileContent
+        );
+        when(tesseract.doOCR(any(BufferedImage.class))).thenReturn("John Doe");
+
+
+        // Perform the request
+        mockMvc.perform(multipart("/api/verify")
+                .file(multipartFile)
+                .param("firstName", "John")
+                .param("lastName", "Doe")
+                .param("age", "25")
+                .param("line1", "Address Line 1")
+                .param("line2", "Address Line 2")
+                .param("state", "Some State")
+                .param("city", "Some City")
+                .param("pincode", "12345")
+                .param("phoneNumber", "1234567890")
+                .param("passportNumber", "AB123456")
+                .param("email", "john.doe@example.com")
+                .contentType(MediaType.MULTIPART_FORM_DATA))
+                .andExpect(status().isConflict());
+    }
+    @Test
+     void testPassportVerificationEndpoint3() throws Exception {
+        // Specify the path to the real JPEG file
+        String filePath = "C:\\Users\\2000107055\\Downloads\\ayswarya.jpg";
+        Path path = Paths.get(filePath);
+        Passport mockPassport = new Passport();
+        mockPassport.setId(1L);
+        // Read the file content
+        byte[] fileContent = Files.readAllBytes(path);
+//        when(passportRepository.findByPassportNumber("AB123456")).thenReturn(mockPassport);
+
+        // Create a MockMultipartFile with the real JPEG content
+        MockMultipartFile multipartFile = new MockMultipartFile(
+                "passportDocumentFile",
+                "ayswarya.jpg",
+                MediaType.IMAGE_JPEG_VALUE,
+                fileContent
+        );
+        when(tesseract.doOCR(any(BufferedImage.class))).thenReturn(null);
+
+
+        // Perform the request
+        mockMvc.perform(multipart("/api/verify")
+                .file(multipartFile)
+                .param("firstName", "John")
+                .param("lastName", "Doe")
+                .param("age", "25")
+                .param("line1", "Address Line 1")
+                .param("line2", "Address Line 2")
+                .param("state", "Some State")
+                .param("city", "Some City")
+                .param("pincode", "12345")
+                .param("phoneNumber", "1234567890")
+                .param("passportNumber", "AB123456")
+                .param("email", "john.doe@example.com")
+                .contentType(MediaType.MULTIPART_FORM_DATA))
+                .andExpect(status().isBadRequest());
+    }
+
+    // Create a dummy JPEG content
+    private byte[] createDummyJpegContent() {
+        // Replace this with your own dummy JPEG content creation logic
+        // For simplicity, this example uses a small JPEG file
+        byte[] dummyJpegContent = new byte[]{
+                (byte) 0xFF, (byte) 0xD8, (byte) 0xFF, (byte) 0xE0, 0, 0x10, 'J', 'F', 'I', 'F', 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, (byte) 0xFF, (byte) 0xDB,
+                0, (byte) 0x84, 0
+                // Add more bytes representing the rest of your JPEG content
+        };
+
+        // In a real-world scenario, you would generate a valid JPEG file content
+        // based on the JPEG file format specifications. This is a simplified example.
+
+        return dummyJpegContent;
+    }
+    @Test
+     void testGetDetailsByPassportNumber() throws Exception {
+        // Create a mock Passport instance
+        Passport mockPassport = new Passport();
+        mockPassport.setId(1L);
+        mockPassport.setPassportNumber("AB123456");
+
+        // Stub the behavior of findByPassportNumber in the mock PassportRepository
+        when(passportRepository.findByPassportNumber("AB123456")).thenReturn(mockPassport);
+
+        // Perform the MockMvc request
+        mockMvc.perform(get("/api/getDetailsByPassportNumber")
+                .param("passportNumber", "AB123456"))
+                .andExpect(status().isOk());
+//                .andExpect(jsonPath("$.id").value(1L))
+//                .andExpect(jsonPath("$.passportNumber").value("AB123456"))
+//                .andExpect(jsonPath("$.message").doesNotExist()); // Assuming 'message' is not present in a successful response
+
+        // Verify that findByPassportNumber was called with the correct argument
+    }
+    @Test
+     void testGetDetailsByPassportNumberNull() throws Exception {
+        // Create a mock Passport instance
+       
+        // Stub the behavior of findByPassportNumber in the mock PassportRepository
+        when(passportRepository.findByPassportNumber("F7802033f")).thenReturn(null);
+
+        // Perform the MockMvc request
+        mockMvc.perform(get("/api/getDetailsByPassportNumber")
+                .param("passportNumber", "F7802033f"))
+                .andExpect(status().isNotFound());
+//                .andExpect(jsonPath("$.id").value(1L))
+//                .andExpect(jsonPath("$.passportNumber").value("AB123456"))
+//                .andExpect(jsonPath("$.message").doesNotExist()); // Assuming 'message' is not present in a successful response
+
+        // Verify that findByPassportNumber was called with the correct argument
+    }
+    @Test
+     void testPassportVerificationEndpoint5() throws Exception {
+        // Specify the path to the real JPEG file
+        String filePath = "C:\\Users\\2000107055\\Downloads\\ayswarya.jpg";
+        Path path = Paths.get(filePath);
+
+        // Read the file content
+        byte[] fileContent = Files.readAllBytes(path);
+
+        // Create a MockMultipartFile with the real JPEG content
+        MockMultipartFile multipartFile = new MockMultipartFile(
+                "passportDocumentFile",
+                "ayswarya.jpg",
+                MediaType.IMAGE_JPEG_VALUE,
+                fileContent
+        );
+        when(tesseract.doOCR(any(BufferedImage.class))).thenReturn("dk");
+
+
+        // Perform the request
+        mockMvc.perform(multipart("/api/verify")
+                .file(multipartFile)
+                .param("firstName", "John")
+                .param("lastName", "Doe")
+                .param("age", "25")
+                .param("line1", "Address Line 1")
+                .param("line2", "Address Line 2")
+                .param("state", "Some State")
+                .param("city", "Some City")
+                .param("pincode", "12345")
+                .param("phoneNumber", "1234567890")
+                .param("passportNumber", "AB123456")
+                .param("email", "john.doe@example.com")
+                .contentType(MediaType.MULTIPART_FORM_DATA))
+                .andExpect(status().isBadRequest());
+    }
+    @Test
+    void testPassportVerificationEndpoint6() throws Exception {
+       // Create a MockMvc instance
+//       MockMvc mockMvc = MockMvcBuilders.standaloneSetup(passportController).build();
+
+       // Create a MockMultipartFile with your dummy JPEG content
+      // byte[] fileContent = createDummyJpegContent();
+        byte[] temp =null;
+       MockMultipartFile multipartFile = new MockMultipartFile(
+               "passportDocumentFile",
+               "dummy.jpg",
+               MediaType.IMAGE_JPEG_VALUE,
+               temp
+       );
+
+       // Perform the request
+       mockMvc.perform(multipart("/api/verify")
+               .file(multipartFile)
+               .param("firstName", "John")
+               .param("lastName", "Doe")
+               .param("age", "25")
+               .param("line1", "Address Line 1")
+               .param("line2", "Address Line 2")
+               .param("state", "Some State")
+               .param("city", "Some City")
+               .param("pincode", "12345")
+               .param("phoneNumber", "1234567890")
+               .param("passportNumber", "AB123456")
+               .param("email", "john.doe@example.com")
+               .contentType(MediaType.MULTIPART_FORM_DATA))
+               .andExpect(status().isBadRequest());
+   }
+    
+}

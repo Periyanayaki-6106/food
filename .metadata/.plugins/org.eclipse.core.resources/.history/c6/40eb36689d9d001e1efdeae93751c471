@@ -1,0 +1,12 @@
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/mgt
+spring.datasource.username=root
+spring.datasource.password=Peri@123
+spring.jsp.show-sql=true
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.ddl-auto=update
+spring.jpa.generate-ddl=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+server.port=9000
+#server.servlet.context-path=/Employeemgt-0.0.1-SNAPSHOT
+server.servlet.context-path=/Employeemgt-0.0.1-SNAPSHOT

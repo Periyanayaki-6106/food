@@ -1,0 +1,17 @@
+1730943090776	Delete element
+1730943570670	Rename package 'com.example.onlinelibrary'
+1730943620956	Rename package 'com.example.onlinelibrary.controller'
+1730943647065	Rename package 'com.example.onlinelibrary.entity'
+1730943675320	Rename package 'com.example.library_applicationentity'
+1730943760107	Rename package 'com.example.onlinelibrary.repository'
+1730943786441	Rename package 'com.example.onlinelibrary.service'
+1730943810990	Rename package 'com.example.onlinelibrary.serviceImpl'
+1730944031734	Rename package 'com.example.library_application.controller'
+1730944066369	Rename package 'com.example.library_application.entity'
+1730944088678	Rename package 'com.example.library_applicaton'
+1730944108711	Rename package 'com.example.library_application.serviceImpl'
+1730944132031	Rename package 'com.example.library_application.service'
+1730944148886	Rename package 'com.example.library_application.repository'
+1730971714383	Delete element
+1730972611011	Rename type 'author'
+1731047925925	Delete element
